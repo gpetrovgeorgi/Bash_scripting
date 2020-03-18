@@ -1,7 +1,7 @@
 #!/bin/bash
 # This generates passwords by given:
 # Number and length of passwords
-set -x
+
 clear
 
 echo "Please enter the password length in characters:"
@@ -21,17 +21,20 @@ read upper
 
 if [ "$numbers" == "Y" ] || [ "$numbers" == "y" ] && [ "$lower" == "Y" ] || [ "$lower" == "y" ] && [ "$upper" == "Y" ] || [ "$upper" == "y" ]; then
   echo "Your passwords are:"
-  generated=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $passwd_length | head -n $passwd_num)
-  echo $generated
+  head -c 5000 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $passwd_length | head -n $passwd_num
+
 elif [ "$numbers" == "Y" ] || [ "$numbers" == "y" ] && [ "$lower" == "Y" ] || [ "$lower" == "y" ]; then
   echo "Your passwords are:"
-  echo "$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w $passwd_length | head -n $passwd_num)"
+  head -c 5000 /dev/urandom | tr -dc 'a-z0-9' | fold -w $passwd_length | head -n $passwd_num
+
 elif [ "$numbers" == "Y" ] || [ "$numbers" == "y" ] && [ "$upper" == "Y" ] || [ "$upper" == "y" ]; then
-  echo "Your passwords are:"                                                                   
-  echo "$(cat /dev/urandom | tr -dc 'A-Z0-9' | fold -w $passwd_length | head -n $passwd_num)"
+  echo "Your passwords are:"
+  head -c 5000 /dev/urandom | tr -dc 'A-Z0-9' | fold -w $passwd_length | head -n $passwd_num
+
 elif [ "$lower" == "Y" ] || [ "$lower" == "y" ] && [ "$upper" == "Y" ] || [ "$upper" == "y" ]; then
-  echo "Your passwords are:"                                                                  
-  echo "$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w $passwd_length | head -n $passwd_num)"
+  echo "Your passwords are:"
+  head -c 5000 /dev/urandom | tr -dc 'a-zA-Z' | fold -w $passwd_length | head -n $passwd_num                                                   
+
 else
   echo "Something went wrong, please check your input data and try again !"
   exit 1
