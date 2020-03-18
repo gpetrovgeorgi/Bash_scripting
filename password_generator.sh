@@ -19,24 +19,31 @@ read lower
 echo "Do you want uppercase letters (Y/n):"
 read upper
 
+echo "Your password/s is/are:"
+
 if [ "$numbers" == "Y" ] || [ "$numbers" == "y" ] && [ "$lower" == "Y" ] || [ "$lower" == "y" ] && [ "$upper" == "Y" ] || [ "$upper" == "y" ]; then
-  echo "Your passwords are:"
   head -c 5000 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $passwd_length | head -n $passwd_num
 
 elif [ "$numbers" == "Y" ] || [ "$numbers" == "y" ] && [ "$lower" == "Y" ] || [ "$lower" == "y" ]; then
-  echo "Your passwords are:"
   head -c 5000 /dev/urandom | tr -dc 'a-z0-9' | fold -w $passwd_length | head -n $passwd_num
 
 elif [ "$numbers" == "Y" ] || [ "$numbers" == "y" ] && [ "$upper" == "Y" ] || [ "$upper" == "y" ]; then
-  echo "Your passwords are:"
   head -c 5000 /dev/urandom | tr -dc 'A-Z0-9' | fold -w $passwd_length | head -n $passwd_num
 
 elif [ "$lower" == "Y" ] || [ "$lower" == "y" ] && [ "$upper" == "Y" ] || [ "$upper" == "y" ]; then
-  echo "Your passwords are:"
-  head -c 5000 /dev/urandom | tr -dc 'a-zA-Z' | fold -w $passwd_length | head -n $passwd_num                                                   
+  head -c 5000 /dev/urandom | tr -dc 'a-zA-Z' | fold -w $passwd_length | head -n $passwd_num
+                                                   
+elif [ "$lower" == "Y" ] || [ "$lower" == "y" ]; then
+  head -c 5000 /dev/urandom | tr -dc 'a-z' | fold -w $passwd_length | head -n $passwd_num
+
+elif [ "$numbers" == "Y" ] || [ "$numbers" == "y" ]; then
+  head -c 5000 /dev/urandom | tr -dc '0-9' | fold -w $passwd_length | head -n $passwd_num
+
+elif [ "$upper" == "Y" ] || [ "$upper" == "y" ]; then
+  head -c 5000 /dev/urandom | tr -dc 'A-Z' | fold -w $passwd_length | head -n $passwd_num
 
 else
-  echo "Something went wrong, please check your input data and try again !"
+  echo -e "--- Nothing ---\nSomething went wrong, please check your input data and try again !"
   exit 1
 fi
 
