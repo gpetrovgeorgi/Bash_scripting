@@ -1,5 +1,6 @@
 #!/bin/bash
 # This script checks the cpu temperature every 5 seconds;
+# Prerequisite: You need to have installed sensors;
 #
 # The systemd service file is: /etc/systemd/system/cputemp.service:
 # [Unit]
